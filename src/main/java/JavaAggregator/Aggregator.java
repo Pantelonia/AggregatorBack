@@ -59,14 +59,14 @@ public class Aggregator {
         User creator = g.fromJson(getJson("https://gitlab.com/api/v4/users/" + project.getCreator_id() + privateToken), User.class);
         try {
             PreparedStatement stmt = null;
-            stmt = connection.prepareStatement("INSERT INTO \"User\" (id, name, username, web_url, avatar_url) values (?,?,?,?,?)");
+            stmt = connection.prepareStatement("INSERT INTO \"user\" (id, name, username, web_url, avatar_url) values (?,?,?,?,?)");
             stmt.setInt(1, creator.getId());
             stmt.setString(2, creator.getName());
             stmt.setString(3, creator.getUsername());
             stmt.setString(4, creator.getWeb_url());
             stmt.setString(5, creator.getAvatar_url());
             stmt.execute();
-            stmt = connection.prepareStatement("INSERT INTO \"Project\" (id, name, description, user_id, created_at, web_url, avatar_url) values (?,?,?,?,?,?,?)");
+            stmt = connection.prepareStatement("INSERT INTO \"project\" (id, name, description, user_id, created_at, web_url, avatar_url) values (?,?,?,?,?,?,?)");
             stmt.setInt(1, project.getId());
             stmt.setString(2, project.getName());
             stmt.setString(3, project.getDescription());
@@ -106,7 +106,7 @@ public class Aggregator {
             // ADD TO DATABASE!
             System.out.println(branches);
             try {
-                PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Commit\" (id, title, created_at, message, project_id, author_name, branches) values (?,?,?,?,?,?,?)");
+                PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"commit\" (id, title, created_at, message, project_id, author_name, branches) values (?,?,?,?,?,?,?)");
                 stmt.setString(1, commit.getId());
                 stmt.setString(2, commit.getTitle());
                 stmt.setString(3, commit.getCreated_at());
@@ -123,7 +123,7 @@ public class Aggregator {
             Diff[] diffs = g.fromJson(getJson(link + "/" + commit.getId() + "/diff"), Diff[].class);
             for (Diff diff : diffs) {
                 try {
-                    PreparedStatement stmt =  connection.prepareStatement("INSERT INTO \"Diff\" (old_path, new_path, new_file, renamed_file, deleted_file, diff, commit_id) values (?,?,?,?,?,?,?)");
+                    PreparedStatement stmt =  connection.prepareStatement("INSERT INTO \"diff\" (old_path, new_path, new_file, renamed_file, deleted_file, diff, commit_id) values (?,?,?,?,?,?,?)");
                     stmt.setString(1, diff.getOld_path() );
                     stmt.setString(2, diff.getNew_path());
                     stmt.setBoolean(3, diff.isNew_file());
