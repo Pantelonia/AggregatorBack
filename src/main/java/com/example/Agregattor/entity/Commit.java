@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Commit", schema = "s242274", catalog = "studs")
-public class CommitEntity {
+public class Commit {
     private String id;
     private String title;
     private String createdAt;
@@ -88,7 +88,7 @@ public class CommitEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CommitEntity that = (CommitEntity) o;
+        Commit that = (Commit) o;
 
         if (projectId != that.projectId) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;

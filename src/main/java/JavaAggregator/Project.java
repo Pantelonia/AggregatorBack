@@ -1,5 +1,7 @@
 package JavaAggregator;
 
+import java.util.List;
+
 public class Project {
     private int id;
     private String description;
@@ -8,6 +10,17 @@ public class Project {
     private String web_url;
     private String avatar_url;
     private int creator_id;
+    private Iterable<Commit> commits;
+
+    public Project(com.example.Agregattor.entity.Project project){
+        this.id = project.getId();
+        this.description = project.getDescription();
+        this.name = project.getName();
+        this.created_at = project.getCreatedAt();
+        this.web_url = project.getWebUrl();
+        this.avatar_url = project.getAvatarUrl();
+        this.creator_id = project.getUserId();
+    }
 
 
     public String getDescription() {
@@ -64,5 +77,13 @@ public class Project {
 
     public void setCreator_id(int creator_id) {
         this.creator_id = creator_id;
+    }
+
+    public Iterable<Commit> getCommits() {
+        return commits;
+    }
+
+    public void setCommits(Iterable<Commit> commits) {
+        this.commits = commits;
     }
 }

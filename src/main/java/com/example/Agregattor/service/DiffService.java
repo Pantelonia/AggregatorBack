@@ -1,6 +1,6 @@
 package com.example.Agregattor.service;
 
-import com.example.Agregattor.entity.DiffEntity;
+import com.example.Agregattor.entity.Diff;
 import com.example.Agregattor.repository.DiffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,11 +10,11 @@ public class DiffService {
     @Autowired
     private DiffRepository diffRepository;
 
-    public Iterable<DiffEntity> getAllDiff(String commit_id){
+    public Iterable<Diff> getAllDiff(String commit_id){
         return diffRepository.findByCommitId(commit_id);
     }
 
-    public  DiffEntity getDiff(Integer id){
+    public Diff getDiff(Integer id){
         return diffRepository.findById(id).get();
     }
 }

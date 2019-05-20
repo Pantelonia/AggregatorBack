@@ -3,11 +3,13 @@ package com.example.Agregattor.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "User", schema = "s242274", catalog = "studs")
-public class UserEntity {
+@Table(name = "Project", schema = "s242274", catalog = "studs")
+public class Project {
     private int id;
     private String name;
-    private String username;
+    private String description;
+    private Integer userId;
+    private String createdAt;
     private String webUrl;
     private String avatarUrl;
 
@@ -32,13 +34,33 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "username")
-    public String getUsername() {
-        return username;
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Basic
+    @Column(name = "user_id")
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    @Basic
+    @Column(name = "created_at")
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Basic
@@ -66,11 +88,13 @@ public class UserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserEntity that = (UserEntity) o;
+        Project that = (Project) o;
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
         if (webUrl != null ? !webUrl.equals(that.webUrl) : that.webUrl != null) return false;
         if (avatarUrl != null ? !avatarUrl.equals(that.avatarUrl) : that.avatarUrl != null) return false;
 
@@ -81,7 +105,9 @@ public class UserEntity {
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (webUrl != null ? webUrl.hashCode() : 0);
         result = 31 * result + (avatarUrl != null ? avatarUrl.hashCode() : 0);
         return result;

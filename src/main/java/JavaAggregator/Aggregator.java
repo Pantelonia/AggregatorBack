@@ -1,10 +1,12 @@
 package JavaAggregator;
 
+
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,24 +19,12 @@ public class Aggregator {
 
     private static Connection connection;
 
-    public static Connection getConnection() {
-        try {
-            Class.forName("org.postgresql.Driver");
-//            connection = DriverManager.getConnection("jdbc:postgresql://192.168.10.99:5432/studs", "s242274", "bld868");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:9999/studs", "s242274", "bld868");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return connection;
-    }
-
-    public  void Aggregate(String args) throws IOException {
-        connection = getConnection();
+    public int getProjectId(String link) throws MalformedURLException {
         BufferedReader br = null;
 //        String link = "https://gitlab.com/siemens/gitlab-build-images";
 //        String link = "https://gitlab.com/siemens/omnibus-gitlab";
         // TODO: send arg "link" to url
-        URL url = new URL(args);
+        URL url = new URL(link);
         int projectId = 1;
         try {
             br = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -47,7 +37,26 @@ public class Aggregator {
             }
         } catch (Exception e) {
         }
+        return projectId;
+    }
 
+    public static Connection getConnection() {
+        try {
+            Class.forName("org.postgresql.Driver");
+//            connection = DriverManager.getConnection("jdbc:postgresql://192.168.10.99:5432/studs", "s242274", "bld868");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:9999/studs", "s242274", "bld868");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return connection;
+    }
+
+    public void Aggregate(String args) throws IOException {
+        connection = getConnection();
+
+
+        int projectId = getProjectId(args);
+        System.out.println(projectId);
 
         //Getting project's info
         Gson g = new Gson();
@@ -55,6 +64,7 @@ public class Aggregator {
         // ADD TO DATABASE!
 
 
+        System.out.println(project.getCreator_id());
         //Getting project's creator info
         User creator = g.fromJson(getJson("https://gitlab.com/api/v4/users/" + project.getCreator_id() + privateToken), User.class);
         try {
@@ -123,8 +133,8 @@ public class Aggregator {
             Diff[] diffs = g.fromJson(getJson(link + "/" + commit.getId() + "/diff"), Diff[].class);
             for (Diff diff : diffs) {
                 try {
-                    PreparedStatement stmt =  connection.prepareStatement("INSERT INTO \"diff\" (old_path, new_path, new_file, renamed_file, deleted_file, diff, commit_id) values (?,?,?,?,?,?,?)");
-                    stmt.setString(1, diff.getOld_path() );
+                    PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"diff\" (old_path, new_path, new_file, renamed_file, deleted_file, diff, commit_id) values (?,?,?,?,?,?,?)");
+                    stmt.setString(1, diff.getOld_path());
                     stmt.setString(2, diff.getNew_path());
                     stmt.setBoolean(3, diff.isNew_file());
                     stmt.setBoolean(4, diff.isRenamed_file());

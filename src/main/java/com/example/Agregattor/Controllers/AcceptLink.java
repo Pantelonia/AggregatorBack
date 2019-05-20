@@ -10,16 +10,16 @@ public class AcceptLink {
 
     @CrossOrigin
     @GetMapping(value = "/takeLink/", params = {"link"})
-    String takeLink(@RequestParam String link) throws IOException {
+    Integer takeLink(@RequestParam String link) throws IOException {
         System.out.println(link);
         Aggregator aggregator = new Aggregator();
-        aggregator.Aggregate(link);
+        System.out.println(aggregator.getProjectId(link));
+    //        aggregator.Aggregate(link);
 
 
-//        Process process = new ProcessBuilder("C:\\Users\\User\\AppData\\Roaming\\uTorrent\\uTorrent.exe"
-////                ,"param1"
-//        ).start();
 
-        return  "back";
+
+        return  222;
+
     }
 }

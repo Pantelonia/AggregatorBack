@@ -3,8 +3,8 @@ package com.example.Agregattor.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Diff", schema = "s242274", catalog ="studs")
-public class DiffEntity {
+@Table(name = "Diff")
+public class Diff {
     private int id;
     private String oldPath;
     private String newPath;
@@ -99,7 +99,7 @@ public class DiffEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DiffEntity that = (DiffEntity) o;
+        Diff that = (Diff) o;
 
         if (id != that.id) return false;
         if (newFile != that.newFile) return false;
