@@ -19,7 +19,7 @@ public class Aggregator {
 
     private static Connection connection;
 
-    public int getProjectId(String link) throws MalformedURLException {
+    public Integer getProjectId(String link) throws MalformedURLException {
         BufferedReader br = null;
 //        String link = "https://gitlab.com/siemens/gitlab-build-images";
 //        String link = "https://gitlab.com/siemens/omnibus-gitlab";

@@ -42,7 +42,9 @@ public class MakeJson {
 //        });
 //        finalData.setCommits(commitsDiffsArrayList);
 
+        System.out.println(id);
       Project project = projectRepository.findById(id).get();
+      System.out.println(project.getName());
         JavaAggregator.Project project1 = new JavaAggregator.Project(project);
         Iterable<Commit> commits = commitRepository.findAllByProjectId(id);
         ArrayList<JavaAggregator.Commit> commitArrayList = new ArrayList<JavaAggregator.Commit>();
@@ -52,14 +54,6 @@ public class MakeJson {
             commitArrayList.add(commit1);
         });
         project1.setCommits(commitArrayList);
-
-
-
-
-
-
-
-
 
         return project1;
     }
