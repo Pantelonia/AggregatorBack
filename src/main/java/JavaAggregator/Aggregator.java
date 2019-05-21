@@ -56,7 +56,6 @@ public class Aggregator {
 
 
         int projectId = getProjectId(args);
-        System.out.println(projectId);
 
         //Getting project's info
         Gson g = new Gson();

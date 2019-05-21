@@ -25,7 +25,7 @@ public class MakeJson {
     DiffRepository diffRepository;
 
     @GetMapping("/project/{id}")
-    JavaAggregator.Project getProject(@PathVariable Integer id) {
+    public JavaAggregator.Project getProject(@PathVariable Integer id) {
 //        CommitsDiffs commitsDiffs = new CommitsDiffs();
 //        ArrayList<CommitsDiffs> commitsDiffsArrayList =new ArrayList<CommitsDiffs>();
 //
