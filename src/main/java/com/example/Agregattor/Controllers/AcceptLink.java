@@ -73,7 +73,7 @@ public class AcceptLink {
         } else {
             System.out.println(crawler);
             Runtime rt = Runtime.getRuntime();
-            Process p = rt.exec("C:\\Users\\User\\Desktop\\SharpAggregator\\GitLabCrawler.exe 4896664 20");
+            Process p = rt.exec("C:\\Users\\User\\Desktop\\SharpAggregator\\GitLabCrawler.exe " + projectId + " 20");
             p.waitFor();
 //            try {
 //                Thread.sleep(17000);
@@ -85,7 +85,7 @@ public class AcceptLink {
 //        System.out.println(projectId);
 //        MakeJson makeJson = new MakeJson();
 //        Project data =  makeJson.getProject(projectId);
-            com.example.Agregattor.entity.Project project = projectRepository.findById(projectId).get();
+        com.example.Agregattor.entity.Project project = projectRepository.findById(projectId).get();
         System.out.println(project.getName());
         JavaAggregator.Project project1 = new JavaAggregator.Project(project);
         Iterable<Commit> commits = commitRepository.findAllByProjectId(projectId);

@@ -8,6 +8,7 @@ import com.example.Agregattor.repository.CommitRepository;
 import com.example.Agregattor.repository.DiffRepository;
 import com.example.Agregattor.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class MakeJson {
     @Autowired
     DiffRepository diffRepository;
 
+    @CrossOrigin
     @GetMapping("/project/{id}")
     public JavaAggregator.Project getProject(@PathVariable Integer id) {
 //        CommitsDiffs commitsDiffs = new CommitsDiffs();
